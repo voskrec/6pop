@@ -1,14 +1,12 @@
-def second(num):
-    # Убираем дубликаты, преобразуя в множество
-    unique_nums = set(num)
-    
-    # Если уникальных чисел меньше 2, второго по величине нет
-    if len(unique_nums) < 2:
+from collections import Counter
+
+def most_frequent(nums):
+    if not nums:
         return None
-        
-    # Сортируем и берем предпоследний элемент
-    return sorted(unique_nums)[-2]
+    # Counter считает частоту каждого элемента
+    # most_common(1) возвращает список из одного кортежа:
+    return Counter(nums).most_common(1)[0][0]
 
 # Проверка
-my_list = [10, 5, 20, 20, 8, 15]
-print(second(my_list))  # Выведет 15
+my_list = [1, 3, 3, 2, 1, 3, 4, 1]
+print(most_frequent(my_list))  # Выведет 3 
