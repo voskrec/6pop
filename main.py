@@ -10,5 +10,5 @@ def most_frequent(nums):
 
 # Проверка
 my_list = [1, 3, 3, 2, 1, 3, 4, 1]
-print(most_frequent(my_list))  # Выведет 3 
+print(most_frequent(my_list))  # Выведет 1
 
