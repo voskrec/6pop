@@ -1,22 +1,22 @@
-def count_letters(text):
-    vowels = "аеёиоуыэюяaeiouy" # Русские и английские гласные
-    consonants = "бвгджзйклмнпрстфхцчшщbcdfghjklmnpqrstvwxz" # Русские и англ. согласные
-    
-    v_count = 0
-    c_count = 0
-    
-    # Приводим к нижнему регистру для удобства
-    text_lower = text.lower()
-    
-    for char in text_lower:
-        if char in vowels:
-            v_count += 1
-        elif char in consonants:
-            c_count += 1
-            
-    return v_count, c_count
+import re
 
-# Проверка
-text = input("Введите текст: ")
-v, c = count_letters(text)
-print(f"Гласных: {v}, Согласных: {c}")
+def remove_html_tags(text):
+    # Регулярное выражение: <.*?> 
+    # <  - начало тега
+    # .* - любые символы
+    # ?  - не жадный поиск (останавливается на первом закрывающем >)
+    # >  - конец тега
+    clean_text = re.sub(r'<.*?>', '', text)
+    
+    # Убираем лишние пробелы, которые могли образоваться после удаления тегов
+    clean_text = re.sub(r'\s+', ' ', clean_text).strip()
+    
+    return clean_text
+
+# Тестирование
+if __name__ == "__main__":
+    html_text = "<h1>Привет, мир!</h1><p>Это <b>тестовый</b> текст с <a href='#'>ссылкой</a>.</p>"
+    print("Исходный текст:")
+    print(html_text)
+    print("\nТекст без HTML-тегов:")
+    print(remove_html_tags(html_text))
